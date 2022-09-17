@@ -93,6 +93,3 @@ class Relu(ActivationBase):
     
     def grad(self, x):
         return 0 if x <= 0 else 1
-        
-s = Sigmoid()
-print(s)
