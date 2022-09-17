@@ -51,8 +51,48 @@ class Tanh(ActivationBase):
         super().__init__()
         
     def __str__(self):
-        "Returns the string representation of the Tanh function"
+        return "Returns the string representation of the Tanh function"
         
+    def __call__(self, x):
+        return self.fn(x)
+    
+    def fn(self, x):
+        return (np.exp(2 * x) - 1)/(np.exp(2 * x) + 1)
+    
+    def grad(self, x):
+        fn_x = self.fn(x)
+        return 1 - fn_x ** 2
+    
+    
+class Exp(ActivationBase):
+    "Exponential function"
+    def __init__(self):
+        super().init__()
+        
+    def __str__(self):
+        return "Exponential"
+    
+    def __call__(self, x):
+        return np.exp(x)
+    
+    def grad(self, x):
+        return np.exp(x)
+        
+        
+class Relu(ActivationBase):
+    """This is the class for Relu
+
+    Args:
+        ActivationBase (_type_): _description_
+    """
+    def __init__(self):
+        super().__init__()
+        
+    def __call__(self, x):
+        return 0 if x <= 0 else x
+    
+    def grad(self, x):
+        return 0 if x <= 0 else 1
         
 s = Sigmoid()
 print(s)
