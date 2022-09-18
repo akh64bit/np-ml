@@ -59,5 +59,31 @@ class CrossEntropy(ObjectiveBase):
         return "CrossEntropy"
     
     def __call__(self, y, ypred):
-        
-        
+        return self.loss(y, ypred)
+    
+    def loss(self, y, ypred):
+        is_binary(y)
+        is_stochastic(y_pred)
+
+        # prevent taking the log of 0
+        eps = np.finfo(float).eps
+
+        # each example is associated with a single class; sum the negative log
+        # probability of the correct label over all samples in the batch.
+        # observe that we are taking advantage of the fact that y is one-hot
+        # encoded
+        cross_entropy = -np.sum(y * np.log(y_pred + eps))
+        return cross_entropy
+    
+    def grad(self):
+        is_binary(y)
+        is_stochastic(y_pred)
+
+        # derivative of xe wrt z is y_pred - y_true, hence we can just
+        # subtract 1 from the probability of the correct class labels
+        grad = y_pred - y
+
+        # [optional] scale the gradients by the number of examples in the batch
+        # n, m = y.shape
+        # grad /= n
+        return grad
