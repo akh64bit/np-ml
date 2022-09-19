@@ -64,7 +64,7 @@ class Tanh(ActivationBase):
         return 1 - fn_x ** 2
     
     
-class Exp(ActivationBase):
+class Exponential(ActivationBase):
     "Exponential function"
     def __init__(self):
         super().init__()
@@ -79,7 +79,7 @@ class Exp(ActivationBase):
         return np.exp(x)
         
         
-class Relu(ActivationBase):
+class ReLU(ActivationBase):
     """This is the class for Relu
 
     Args:
