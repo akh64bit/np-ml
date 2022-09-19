@@ -24,3 +24,16 @@ class SchedulerBase(ABC):
     @abstractmethod
     def learning_rate(self, step=None):
         raise NotImplementedError
+    
+    
+class ConstantScheduler(SchedulerBase):
+    def __init__(self, lr=0.01, **kwargs):
+        super().__init__()
+        self.lr = lr
+        self.hyperparameters = {"id": "ConstantScheduler", "lr": self.lr}
+        
+    def __str__(self):
+        return f"ConstantSchedulur(lr={self.lr})"
+    
+    def learning_rate(self, **kwargs):
+        return self.lr
